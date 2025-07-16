@@ -380,298 +380,293 @@ export default function BrainSignalVisualizer() {
     }, [handleNewSample, handleNewECG]);
 
     return (
-        <div className={classNames(
-            "min-h-screen transition-all duration-500 overflow-x-hidden",
-            isDarkMode
-                ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
-                : "bg-gradient-to-br from-slate-50 via-white to-slate-100"
-        )}>
-            {/* Enhanced Background Pattern */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-0 w-full h-full opacity-30">
-                    <div className="absolute top-20 left-20 w-72 h-72 rounded-full bg-gradient-to-br from-blue-400/10 to-purple-600/10 blur-3xl animate-pulse"></div>
-                    <div className="absolute bottom-20 right-20 w-72 h-72 rounded-full bg-gradient-to-br from-cyan-400/10 to-teal-600/10 blur-3xl animate-pulse delay-1000"></div>
-                    <div className="absolute top-1/2 left-1/2 w-96 h-96 rounded-full bg-gradient-to-br from-violet-400/5 to-pink-600/5 blur-3xl animate-pulse delay-2000"></div>
-                </div>
+        <div className="min-h-screen w-full relative bg-gradient-to-br from-background via-background to-muted/10 transition-all duration-300 overflow-x-hidden">
+            {/* Subtle Background Pattern */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-40">
+                <div className="absolute top-20 left-20 w-96 h-96 rounded-full bg-gradient-to-br from-primary/5 to-chart-1/5 blur-3xl animate-gentle-pulse"></div>
+                <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-br from-chart-2/5 to-chart-3/5 blur-3xl animate-gentle-pulse" style={{animationDelay: '1s'}}></div>
+                <div className="absolute top-1/2 left-1/2 w-[28rem] h-[28rem] rounded-full bg-gradient-to-br from-chart-4/3 to-chart-5/3 blur-3xl animate-gentle-pulse" style={{animationDelay: '2s'}}></div>
             </div>
 
-            {/* Improved Header */}
-            <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/50 dark:border-slate-700/50 shadow-lg">
-                <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            {/* Modernized Header */}
+            <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/60 shadow-soft">
+                <div className="w-full mx-auto px-6 sm:px-8 lg:px-12 py-6">
                     <div className="flex items-center justify-between">
                         {/* Enhanced Logo Section */}
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-6">
                             <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-2xl blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
-                                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 via-purple-600 to-cyan-500 shadow-xl">
-                                    <Brain className="h-8 w-8 text-white" />
+                                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-chart-1 to-chart-2 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500 ease-out"></div>
+                                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-chart-1 shadow-soft-lg">
+                                    <Brain className="h-9 w-9 text-primary-foreground" />
                                 </div>
                             </div>
-                            <div>
-                                <h1 className="text-2xl lg:text-3xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                                    Neural<span className="text-teal-500">Flow</span>
+                            <div className="space-y-1">
+                                <h1 className="text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-primary via-chart-1 to-chart-2 bg-clip-text text-transparent">
+                                    Neural<span className="text-chart-3">Flow</span>
                                 </h1>
-                                <p className="text-sm lg:text-base text-slate-600 dark:text-slate-300 font-medium">
+                                <p className="text-sm lg:text-base text-muted-foreground font-medium tracking-tight">
                                     Advanced Brain Monitoring System
                                 </p>
                             </div>
                         </div>
 
-                        {/* Enhanced Controls with Better Padding */}
-                        <div className="flex items-center gap-4 px-6 py-4">
-                            {/* Connection Status Indicator with Enhanced Padding */}
+                        {/* Enhanced Controls */}
+                        <div className="flex items-center gap-6">
+                            {/* Connection Status Indicator */}
                             <div className={classNames(
-                                "flex items-center gap-4 px-6 py-4 rounded-xl transition-all duration-300 shadow-lg",
+                                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 border",
                                 isDeviceConnected
-                                    ? "bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border-2 border-emerald-200 dark:border-emerald-700"
-                                    : "bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-2 border-red-200 dark:border-red-700"
+                                    ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-400 dark:border-emerald-800"
+                                    : "bg-destructive/10 text-destructive border-destructive/20 dark:bg-destructive/5 dark:border-destructive/20"
                             )}>
                                 <div className={classNames(
-                                    "h-4 w-4 rounded-full shadow-lg flex-shrink-0",
-                                    isDeviceConnected ? "bg-emerald-500 animate-pulse" : "bg-red-500"
+                                    "h-3 w-3 rounded-full flex-shrink-0 transition-all duration-300",
+                                    isDeviceConnected ? "bg-emerald-500 animate-gentle-pulse" : "bg-destructive"
                                 )} />
-                                <span className="text-sm font-bold hidden sm:inline px-2" style={{ padding: "0.4rem" }}>
+                                <span className="text-sm font-medium hidden sm:inline">
                                     {isDeviceConnected ? "Connected" : "Disconnected"}
                                 </span>
                             </div>
 
-                            {/* Action Button with Enhanced Padding */}
+                            {/* Action Button */}
                             <UIButton
                                 onClick={isDeviceConnected ? disconnectDevice : connectDevice}
-                                className={classNames(
-                                    "gap-3 px-8 py-4 rounded-xl font-bold text-white shadow-xl transition-all duration-300 transform hover:scale-105 min-w-[160px]", // Increased min-width
-                                    isDeviceConnected
-                                        ? "bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700"
-                                        : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-                                )}
+                                variant={isDeviceConnected ? "destructive" : "default"}
+                                size="lg"
+                                className="gap-3 min-w-[140px] font-semibold"
                             >
                                 {isDeviceConnected ? (
-                                    <div className="flex items-center gap-3 px-3 py-1"> {/* Increased internal padding */}
-                                        <PlugZapIcon className="h-5 w-5 flex-shrink-0" />
-                                        <span className="hidden sm:inline whitespace-nowrap">Disconnect</span> {/* Added whitespace-nowrap */
-                                        }
-                                    </div>
+                                    <>
+                                        <PlugZapIcon className="h-5 w-5" />
+                                        <span className="hidden sm:inline">Disconnect</span>
+                                    </>
                                 ) : (
-                                    <div className="flex items-center gap-3 px-3 py-1"> {/* Increased internal padding */}
-                                        <PlugIcon className="h-5 w-5 flex-shrink-0" />
-                                        <span className="hidden sm:inline whitespace-nowrap">Connect</span> {/* Added whitespace-nowrap */}
-                                    </div>
+                                    <>
+                                        <PlugIcon className="h-5 w-5" />
+                                        <span className="hidden sm:inline">Connect</span>
+                                    </>
                                 )}
                             </UIButton>
 
-                            {/* Theme Toggle with Enhanced Padding */}
+                            {/* Theme Toggle */}
                             <UIButton
                                 onClick={() => setIsDarkMode(!isDarkMode)}
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 shadow-lg transition-all duration-300 h-14 w-14 p-4"
+                                className="rounded-xl"
                             >
-                                {isDarkMode ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
+                                {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                             </UIButton>
                         </div>
                     </div>
                 </div>
             </header>
 
-            {/* Improved Main Content */}
-            <main className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-8">
+            {/* Modernized Main Content */}
+            <main className="w-full mx-auto px-6 sm:px-8 lg:px-12 py-8 lg:py-12 space-y-12 bg-gradient-to-br from-background via-background to-muted/20">
                 {/* Enhanced Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* Device Status */}
-                    <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105" style={{ padding: "0.9rem" }}>
-                        <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/50 dark:to-blue-800/50">
-                                <Signal className="h-7 w-7 text-blue-600 dark:text-blue-400" />
+                    <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 hover:scale-[1.02] transition-all duration-300">
+                        <UICardHeader className="pb-4">
+                            <div className="flex items-center justify-between">
+                                <div className="p-3 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/20 ring-1 ring-primary/20">
+                                    <Signal className="h-6 w-6 text-primary" />
+                                </div>
+                                <div className={classNames(
+                                    "px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider border",
+                                    isDeviceConnected
+                                        ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-400 dark:border-emerald-800"
+                                        : "bg-muted text-muted-foreground border-border"
+                                )}>
+                                    {isDeviceConnected ? "ONLINE" : "OFFLINE"}
+                                </div>
                             </div>
-                            <div className={classNames(
-                                "px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wide",
-                                isDeviceConnected
-                                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
-                                    : "bg-slate-100 text-slate-700 dark:bg-slate-800/50 dark:text-slate-400"
-                            )}>
-                                {isDeviceConnected ? "ONLINE" : "OFFLINE"}
-                            </div>
-                        </div>
-                        <div className="space-y-2" style={{ paddingLeft: "0.9rem" }}>
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                Device Status
-                            </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Neural interface connection
-                            </p>
-                        </div>
-                    </div>
+                        </UICardHeader>
+                        <UICardContent>
+                            <UICardTitle>Device Status</UICardTitle>
+                            <UICardDescription>Neural interface connection</UICardDescription>
+                        </UICardContent>
+                    </UICard>
 
                     {/* Heart Rate */}
-                    <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105 " style={{ padding: "0.9rem" }}>
-                        <div className="flex items-center justify-between mb-4 ">
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-red-100 to-pink-200 dark:from-red-900/50 dark:to-pink-800/50">
-                                <Heart className={classNames(
-                                    "h-7 w-7 transition-all duration-300",
-                                    heartbeatActive ? "text-red-500 scale-125" : "text-red-600 dark:text-red-400"
-                                )} />
+                    <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 hover:scale-[1.02] transition-all duration-300">
+                        <UICardHeader className="pb-4">
+                            <div className="flex items-center justify-between">
+                                <div className="p-3 rounded-2xl bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/50 dark:to-pink-950/50 ring-1 ring-red-200/50 dark:ring-red-800/50">
+                                    <Heart className={classNames(
+                                        "h-6 w-6 transition-all duration-300",
+                                        heartbeatActive ? "text-red-500 scale-110" : "text-red-600 dark:text-red-400"
+                                    )} />
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-2xl font-bold text-foreground" ref={bpmCurrentRef}>--</div>
+                                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">BPM</div>
+                                </div>
                             </div>
-                            <div className="text-right">
-                                <div className="text-3xl font-black text-slate-900 dark:text-slate-100" ref={bpmCurrentRef}>--</div>
-                                <div className="text-sm font-medium text-slate-500">BPM</div>
-                            </div>
-                        </div>
-                        <div className="space-y-2 " style={{ paddingLeft: "0.9rem" }}>
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                Heart Rate
-                            </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mx-4">
-                                Cardiovascular monitoring
-                            </p>
-                        </div>
-                    </div>
+                        </UICardHeader>
+                        <UICardContent>
+                            <UICardTitle>Heart Rate</UICardTitle>
+                            <UICardDescription>Cardiovascular monitoring</UICardDescription>
+                        </UICardContent>
+                    </UICard>
 
                     {/* HRV */}
-                    <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105" style={{ padding: "0.9rem" }}>
-                        <div className="flex items-center justify-between mb-4">
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-100 to-violet-200 dark:from-purple-900/50 dark:to-violet-800/50">
-                                <Activity className="h-7 w-7 text-purple-600 dark:text-purple-400" />
+                    <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 hover:scale-[1.02] transition-all duration-300">
+                        <UICardHeader className="pb-4">
+                            <div className="flex items-center justify-between">
+                                <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/50 dark:to-violet-950/50 ring-1 ring-purple-200/50 dark:ring-purple-800/50">
+                                    <Activity className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                                </div>
+                                <div className="text-right">
+                                    <div className="text-2xl font-bold text-foreground" ref={hrvCurrentRef}>--</div>
+                                    <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider">MS</div>
+                                </div>
                             </div>
-                            <div className="text-right">
-                                <div className="text-3xl font-black text-slate-900 dark:text-slate-100" ref={hrvCurrentRef}>--</div>
-                                <div className="text-sm font-medium text-slate-500">MS</div>
-                            </div>
-                        </div>
-                        <div className="space-y-2" >
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                Heart Rate Variability
-                            </h3>
-                            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Autonomic nervous system
-                            </p>
-                        </div>
-                    </div>
+                        </UICardHeader>
+                        <UICardContent>
+                            <UICardTitle>Heart Rate Variability</UICardTitle>
+                            <UICardDescription>Autonomic nervous system</UICardDescription>
+                        </UICardContent>
+                    </UICard>
 
                     {/* Mental State */}
-                    <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105" style={{ padding: "0.9rem" }}>
-                        <div className="flex items-center justify-between mb-4" >
-                            <div className="p-3 rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-200 dark:from-emerald-900/50 dark:to-teal-800/50">
-                                <Brain className="h-7 w-7 text-emerald-600 dark:text-emerald-400" />
+                    <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 hover:scale-[1.02] transition-all duration-300">
+                        <UICardHeader className="pb-4">
+                            <div className="flex items-center justify-between">
+                                <div className="p-3 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50 ring-1 ring-emerald-200/50 dark:ring-emerald-800/50">
+                                    <Brain className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+                                </div>
+                                <div className="px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                                    AI ANALYSIS
+                                </div>
                             </div>
-                            <div className="px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wide bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300">
-                                AI ANALYSIS
-                            </div>
-                        </div>
-                        <div className="space-y-2" >
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                Mental State
-                            </h3>
-                            <div className="text-lg font-bold">
+                        </UICardHeader>
+                        <UICardContent>
+                            <UICardTitle>Mental State</UICardTitle>
+                            <div className="mt-3">
                                 <MoodDisplay state={currentMentalState} />
                             </div>
-                        </div>
-                    </div>
+                        </UICardContent>
+                    </UICard>
                 </div>
 
                 {/* Enhanced Signal Visualization */}
-                <div className="space-y-6">
-                    <div className="text-center">
-                        <h2 className="text-3xl font-black bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-slate-400 bg-clip-text text-transparent mb-2">
+                <div className="space-y-8">
+                    <div className="text-center space-y-3">
+                        <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                             Live Signal Monitoring
                         </h2>
-                        <p className="text-lg text-slate-600 dark:text-slate-400">
+                        <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
                             Real-time bioelectric signal visualization
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 gap-8">
                         {/* EEG Channel 1 */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-amber-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">EEG Channel 1</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-sm font-bold">
-                                        FRONTAL CORTEX
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-5 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">EEG Channel 1</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-5/10 text-chart-5 border border-chart-5/20 text-xs font-bold uppercase tracking-wider">
+                                            FRONTAL CORTEX
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-amber-200 dark:border-amber-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={eeg1CanvasRef}
-                                    channels={[1]}
-                                    colors={{ 1: "#F59E0B" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={eeg1CanvasRef}
+                                        channels={[1]}
+                                        colors={{ 1: "#F59E0B" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
 
                         {/* EEG Channel 2 */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">EEG Channel 2</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300 text-sm font-bold">
-                                        PARIETAL CORTEX
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-2 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">EEG Channel 2</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-2/10 text-chart-2 border border-chart-2/20 text-xs font-bold uppercase tracking-wider">
+                                            PARIETAL CORTEX
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-cyan-200 dark:border-cyan-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={eeg2CanvasRef}
-                                    channels={[2]}
-                                    colors={{ 2: "#06B6D4" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={eeg2CanvasRef}
+                                        channels={[2]}
+                                        colors={{ 2: "#06B6D4" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
 
                         {/* ECG Signal */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-rose-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">ECG Signal</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 text-sm font-bold">
-                                        CARDIAC RHYTHM
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-4 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">ECG Signal</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-4/10 text-chart-4 border border-chart-4/20 text-xs font-bold uppercase tracking-wider">
+                                            CARDIAC RHYTHM
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-rose-200 dark:border-rose-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={ecgCanvasRef}
-                                    channels={[3]}
-                                    colors={{ 3: "#F43F5E" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={ecgCanvasRef}
+                                        channels={[3]}
+                                        colors={{ 3: "#F43F5E" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
                     </div>
                 </div>
 
@@ -772,25 +767,17 @@ export default function BrainSignalVisualizer() {
                 </div>
 
                 {/* Enhanced Action Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 pt-18">
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                {/* Modernized Action Buttons */}
+                <div className="flex flex-wrap justify-center gap-6 pt-8">
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <Download className="h-5 w-5" />
                         Export Data
                     </UIButton>
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <Share2 className="h-5 w-5" />
                         Share Session
                     </UIButton>
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <RotateCcw className="h-5 w-5" />
                         Reset Session
                     </UIButton>
