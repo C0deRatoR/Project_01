@@ -564,97 +564,109 @@ export default function BrainSignalVisualizer() {
 
                     <div className="grid grid-cols-1 gap-8">
                         {/* EEG Channel 1 */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-amber-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">EEG Channel 1</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-sm font-bold">
-                                        FRONTAL CORTEX
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-5 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">EEG Channel 1</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-5/10 text-chart-5 border border-chart-5/20 text-xs font-bold uppercase tracking-wider">
+                                            FRONTAL CORTEX
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-amber-200 dark:border-amber-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={eeg1CanvasRef}
-                                    channels={[1]}
-                                    colors={{ 1: "#F59E0B" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={eeg1CanvasRef}
+                                        channels={[1]}
+                                        colors={{ 1: "#F59E0B" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
 
                         {/* EEG Channel 2 */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-cyan-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">EEG Channel 2</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300 text-sm font-bold">
-                                        PARIETAL CORTEX
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-2 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">EEG Channel 2</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-2/10 text-chart-2 border border-chart-2/20 text-xs font-bold uppercase tracking-wider">
+                                            PARIETAL CORTEX
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-cyan-200 dark:border-cyan-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={eeg2CanvasRef}
-                                    channels={[2]}
-                                    colors={{ 2: "#06B6D4" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={eeg2CanvasRef}
+                                        channels={[2]}
+                                        colors={{ 2: "#06B6D4" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
 
                         {/* ECG Signal */}
-                        <div className="group relative overflow-hidden rounded-3xl bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 p-8 hover:shadow-2xl transition-all duration-500">
-                            <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-4 h-4 rounded-full bg-rose-500 shadow-lg animate-pulse"></div>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">ECG Signal</h3>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <span className="px-4 py-2 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 text-sm font-bold">
-                                        CARDIAC RHYTHM
-                                    </span>
-                                    <div className="flex gap-2">
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Maximize2 className="h-4 w-4" />
-                                        </UIButton>
-                                        <UIButton variant="ghost" size="sm" className="h-10 w-10 rounded-xl">
-                                            <Settings className="h-4 w-4" />
-                                        </UIButton>
+                        <UICard className="group relative overflow-hidden bg-gradient-to-br from-card/95 to-card/80 hover:from-card to-card/90 border-border/40 hover:border-border/60 transition-all duration-300">
+                            <UICardHeader>
+                                <div className="flex items-center justify-between w-full">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-3 h-3 rounded-full bg-chart-4 shadow-sm animate-gentle-pulse"></div>
+                                        <UICardTitle className="text-xl">ECG Signal</UICardTitle>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <span className="px-3 py-1.5 rounded-xl bg-chart-4/10 text-chart-4 border border-chart-4/20 text-xs font-bold uppercase tracking-wider">
+                                            CARDIAC RHYTHM
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Maximize2 className="h-4 w-4" />
+                                            </UIButton>
+                                            <UIButton variant="ghost" size="icon" className="h-9 w-9 rounded-lg">
+                                                <Settings className="h-4 w-4" />
+                                            </UIButton>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="relative h-48 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-2 border-rose-200 dark:border-rose-800/50 overflow-hidden shadow-inner">
-                                <WebglPlotCanvas
-                                    ref={ecgCanvasRef}
-                                    channels={[3]}
-                                    colors={{ 3: "#F43F5E" }}
-                                    gridnumber={10}
-                                />
-                            </div>
-                        </div>
+                            </UICardHeader>
+                            <UICardContent>
+                                <div className="relative h-48 rounded-xl bg-muted/30 border border-border/60 overflow-hidden">
+                                    <WebglPlotCanvas
+                                        ref={ecgCanvasRef}
+                                        channels={[3]}
+                                        colors={{ 3: "#F43F5E" }}
+                                        gridnumber={10}
+                                    />
+                                </div>
+                            </UICardContent>
+                        </UICard>
                     </div>
                 </div>
 
@@ -755,25 +767,17 @@ export default function BrainSignalVisualizer() {
                 </div>
 
                 {/* Enhanced Action Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 pt-18">
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                {/* Modernized Action Buttons */}
+                <div className="flex flex-wrap justify-center gap-6 pt-8">
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <Download className="h-5 w-5" />
                         Export Data
                     </UIButton>
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <Share2 className="h-5 w-5" />
                         Share Session
                     </UIButton>
-                    <UIButton
-                        variant="outline"
-                        className="gap-3 px-8 py-4 rounded-2xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 border-slate-200 dark:border-slate-700 hover:bg-white/70 dark:hover:bg-slate-800/70 font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
-                    >
+                    <UIButton variant="outline" size="lg" className="gap-3 font-semibold">
                         <RotateCcw className="h-5 w-5" />
                         Reset Session
                     </UIButton>
