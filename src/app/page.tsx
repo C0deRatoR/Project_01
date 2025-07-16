@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import EEGDataPlot  from '@/components/EEGDataPlot';
+import BrainSignalDashboard from '@/components/BrainSignalDashboard';
 
 export default function HomePage() {
-  return <EEGDataPlot />;
+  return <BrainSignalDashboard />;
 }
 
 
