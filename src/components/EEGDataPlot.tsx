@@ -34,19 +34,19 @@ const Button: React.FC<ButtonProps> = React.memo(({
     disabled = false,
     ...props 
 }) => {
-    const baseStyles = "inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+    const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border-0";
     
     const variants = {
         primary: "bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm",
-        secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700",
-        ghost: "text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800",
-        outline: "border border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+        secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700",
+        ghost: "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800",
+        outline: "border border-gray-200 text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
     };
     
     const sizes = {
-        sm: "h-8 px-3 text-sm rounded-md",
-        md: "h-10 px-4 text-sm rounded-lg",
-        lg: "h-12 px-6 text-base rounded-lg"
+        sm: "h-8 px-3 text-sm rounded",
+        md: "h-10 px-4 text-sm rounded",
+        lg: "h-12 px-6 text-base rounded"
     };
     
     return (
@@ -65,7 +65,7 @@ Button.displayName = "Button";
 // Clean MoodDisplay component
 const MoodDisplay = React.memo(({ state }: { state: string }) => {
     const stateStyles = {
-        "no_data": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400",
+        "no_data": "bg-gray-100 text-gray-600 dark:bg-slate-800 dark:text-slate-400",
         "relaxed": "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
         "focused": "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
         "stressed": "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300",
@@ -76,7 +76,7 @@ const MoodDisplay = React.memo(({ state }: { state: string }) => {
     
     return (
         <div className={cn(
-            "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors",
+            "inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium transition-colors",
             stateStyles[state as keyof typeof stateStyles] || stateStyles.no_data
         )}>
             <div className={cn(
@@ -85,7 +85,7 @@ const MoodDisplay = React.memo(({ state }: { state: string }) => {
                 state === "focused" ? "bg-blue-500" :
                 state === "stressed" ? "bg-red-500" :
                 state === "calm" ? "bg-teal-500" :
-                "bg-slate-400"
+                "bg-gray-400"
             )} />
             {displayText}
         </div>
@@ -96,13 +96,13 @@ MoodDisplay.displayName = "MoodDisplay";
 // Minimalist signal visualization component
 const SignalVisualization = React.memo(({ color = "emerald", isActive = false }: { color?: string, isActive?: boolean }) => {
     return (
-        <div className="w-full h-full bg-slate-50/80 dark:bg-slate-900/80 rounded-lg relative overflow-hidden">
+        <div className="w-full h-full bg-gray-50/80 dark:bg-slate-900/80 rounded relative overflow-hidden">
             {/* Grid pattern */}
             <div className="absolute inset-0 opacity-20">
                 <svg width="100%" height="100%">
                     <defs>
                         <pattern id={`grid-${color}`} width="20" height="20" patternUnits="userSpaceOnUse">
-                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-slate-300 dark:text-slate-700"/>
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-gray-300 dark:text-slate-700"/>
                         </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill={`url(#grid-${color})`} />
@@ -127,7 +127,7 @@ const SignalVisualization = React.memo(({ color = "emerald", isActive = false }:
             <div className="absolute top-2 right-2">
                 <div className={cn(
                     "w-2 h-2 rounded-full",
-                    isActive ? `bg-${color}-500 animate-pulse` : "bg-slate-300"
+                    isActive ? `bg-${color}-500 animate-pulse` : "bg-gray-300"
                 )} />
             </div>
         </div>
@@ -194,26 +194,25 @@ export default function BrainSignalVisualizer() {
 
     return (
         <div className={cn("min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300", isDarkMode && "dark")}>
-            <div className="max-w-7xl mx-auto p-6">
+            <div className="max-w-7xl mx-auto p-4">
                 {/* Header */}
                 <motion.header 
-                    className="flex items-center justify-between mb-8"
+                    className="flex items-center justify-between mb-6"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
                     <div className="flex items-center gap-4">
                         <div className="relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-lg blur opacity-75"></div>
-                            <div className="relative h-12 w-12 flex items-center justify-center rounded-lg bg-emerald-600 shadow-lg">
+                            <div className="h-12 w-12 flex items-center justify-center rounded bg-emerald-600 shadow-sm">
                                 <Brain className="h-6 w-6 text-white" />
                             </div>
                         </div>
                         <div>
-                            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                            <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100">
                                 Neural<span className="text-emerald-600">Flow</span>
                             </h1>
-                            <p className="text-sm text-slate-600 dark:text-slate-400">Advanced Brain Monitoring System</p>
+                            <p className="text-sm text-gray-600 dark:text-slate-400">Advanced Brain Monitoring System</p>
                         </div>
                     </div>
 
@@ -243,41 +242,41 @@ export default function BrainSignalVisualizer() {
                 </motion.header>
 
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-12 gap-6 h-[calc(100vh-12rem)]">
+                <div className="grid grid-cols-12 gap-4 h-[calc(100vh-10rem)]">
                     {/* Left Column - Stats */}
-                    <div className="col-span-3 space-y-6">
+                    <div className="col-span-3 space-y-4">
                         {/* Connection Status */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
                         >
                             <div className="flex items-center gap-3 mb-4">
                                 <div className={cn(
-                                    "p-2 rounded-lg",
-                                    isDeviceConnected ? "bg-emerald-100 dark:bg-emerald-900/30" : "bg-slate-100 dark:bg-slate-800"
+                                    "p-2 rounded",
+                                    isDeviceConnected ? "bg-emerald-100 dark:bg-emerald-900/30" : "bg-gray-100 dark:bg-slate-800"
                                 )}>
                                     <Signal className={cn(
                                         "h-5 w-5",
-                                        isDeviceConnected ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400"
+                                        isDeviceConnected ? "text-emerald-600 dark:text-emerald-400" : "text-gray-400"
                                     )} />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">Device Status</h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">Neural Interface</p>
+                                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Device Status</h3>
+                                    <p className="text-sm text-gray-600 dark:text-slate-400">Neural Interface</p>
                                 </div>
                             </div>
                             <div className="text-center">
                                 <div className={cn(
-                                    "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold",
+                                    "inline-flex items-center gap-2 px-4 py-2 rounded text-sm font-semibold",
                                     isDeviceConnected 
                                         ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300" 
-                                        : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400"
+                                        : "bg-gray-100 text-gray-600 dark:bg-slate-800 dark:text-slate-400"
                                 )}>
                                     <div className={cn(
                                         "w-2 h-2 rounded-full",
-                                        isDeviceConnected ? "bg-emerald-500 animate-pulse" : "bg-slate-400"
+                                        isDeviceConnected ? "bg-emerald-500 animate-pulse" : "bg-gray-400"
                                     )} />
                                     {isDeviceConnected ? "ONLINE" : "OFFLINE"}
                                 </div>
@@ -286,31 +285,31 @@ export default function BrainSignalVisualizer() {
 
                         {/* Vital Signs */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                         >
-                            <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-4">Vital Signs</h3>
+                            <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-4">Vital Signs</h3>
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
                                         <Heart className="h-4 w-4 text-red-500" />
-                                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Heart Rate</span>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">Heart Rate</span>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-xl font-bold text-slate-900 dark:text-slate-100">{currentBPM}</div>
-                                        <div className="text-xs text-slate-500">BPM</div>
+                                        <div className="text-xl font-bold text-gray-900 dark:text-slate-100">{currentBPM}</div>
+                                        <div className="text-xs text-gray-500">BPM</div>
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
                                         <Activity className="h-4 w-4 text-blue-500" />
-                                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">HRV</span>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">HRV</span>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-xl font-bold text-slate-900 dark:text-slate-100">{currentHRV}</div>
-                                        <div className="text-xs text-slate-500">MS</div>
+                                        <div className="text-xl font-bold text-gray-900 dark:text-slate-100">{currentHRV}</div>
+                                        <div className="text-xs text-gray-500">MS</div>
                                     </div>
                                 </div>
                             </div>
@@ -318,18 +317,18 @@ export default function BrainSignalVisualizer() {
 
                         {/* Mental State */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                                <div className="p-2 rounded bg-emerald-100 dark:bg-emerald-900/30">
                                     <Brain className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-900 dark:text-slate-100">Mental State</h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">AI Analysis</p>
+                                    <h3 className="font-semibold text-gray-900 dark:text-slate-100">Mental State</h3>
+                                    <p className="text-sm text-gray-600 dark:text-slate-400">AI Analysis</p>
                                 </div>
                             </div>
                             <div className="text-center">
@@ -339,12 +338,12 @@ export default function BrainSignalVisualizer() {
 
                         {/* Session Controls */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
-                            <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-4">Session Control</h3>
+                            <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-4">Session Control</h3>
                             <div className="space-y-3">
                                 <Button variant="outline" className="w-full gap-2 justify-start">
                                     <Download className="h-4 w-4" />
@@ -363,7 +362,7 @@ export default function BrainSignalVisualizer() {
                     </div>
 
                     {/* Center Column - Main Visualization */}
-                    <div className="col-span-6 space-y-6">
+                    <div className="col-span-6 space-y-4">
                         {/* Signal Monitors */}
                         <div className="grid grid-cols-3 gap-4">
                             {[
@@ -373,21 +372,21 @@ export default function BrainSignalVisualizer() {
                             ].map((signal, index) => (
                                 <motion.div
                                     key={signal.title}
-                                    className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/60 dark:border-slate-800/60"
+                                    className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-3"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                                 >
                                     <div className="flex items-center justify-between mb-3">
                                         <div>
-                                            <h4 className="font-semibold text-slate-900 dark:text-slate-100 text-sm">{signal.title}</h4>
-                                            <p className="text-xs text-slate-500">{signal.subtitle}</p>
+                                            <h4 className="font-semibold text-gray-900 dark:text-slate-100 text-sm">{signal.title}</h4>
+                                            <p className="text-xs text-gray-500">{signal.subtitle}</p>
                                         </div>
                                         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                                             <MoreHorizontal className="h-4 w-4" />
                                         </Button>
                                     </div>
-                                    <div className="h-24">
+                                    <div className="h-20">
                                         <SignalVisualization color={signal.color} isActive={isDeviceConnected} />
                                     </div>
                                 </motion.div>
@@ -396,22 +395,22 @@ export default function BrainSignalVisualizer() {
 
                         {/* Brain Wave Analysis */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.5 }}
                         >
                             <div className="flex items-center justify-between mb-6">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                                    <div className="p-2 rounded bg-emerald-100 dark:bg-emerald-900/30">
                                         <Waves className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-slate-900 dark:text-slate-100">Brain Wave Analysis</h3>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Real-time frequency distribution</p>
+                                        <h3 className="font-semibold text-gray-900 dark:text-slate-100">Brain Wave Analysis</h3>
+                                        <p className="text-sm text-gray-600 dark:text-slate-400">Real-time frequency distribution</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                                     PROCESSING
                                 </div>
@@ -419,10 +418,10 @@ export default function BrainSignalVisualizer() {
 
                             <div className="grid grid-cols-2 gap-8">
                                 {/* Left Hemisphere */}
-                                <div className="space-y-4">
+                                <div className="space-y-3">
                                     <div className="flex items-center gap-2 mb-3">
                                         <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">Left Hemisphere</h4>
+                                        <h4 className="font-semibold text-gray-900 dark:text-slate-100">Left Hemisphere</h4>
                                     </div>
                                     {brainWaveData.left.map((wave, index) => (
                                         <motion.div
@@ -434,14 +433,14 @@ export default function BrainSignalVisualizer() {
                                         >
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <span className="font-medium text-slate-900 dark:text-slate-100">{wave.label}</span>
-                                                    <span className="text-xs text-slate-500 ml-2">{wave.frequency}</span>
+                                                    <span className="font-medium text-gray-900 dark:text-slate-100">{wave.label}</span>
+                                                    <span className="text-xs text-gray-500 ml-2">{wave.frequency}</span>
                                                 </div>
-                                                <span className="font-bold text-slate-900 dark:text-slate-100">
+                                                <span className="font-bold text-gray-900 dark:text-slate-100">
                                                     {isDeviceConnected ? wave.value.toFixed(1) : "--"}%
                                                 </span>
                                             </div>
-                                            <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                            <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded overflow-hidden">
                                                 <motion.div
                                                     className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600"
                                                     initial={{ width: 0 }}
@@ -454,10 +453,10 @@ export default function BrainSignalVisualizer() {
                                 </div>
 
                                 {/* Right Hemisphere */}
-                                <div className="space-y-4">
+                                <div className="space-y-3">
                                     <div className="flex items-center gap-2 mb-3">
                                         <div className="w-3 h-3 rounded-full bg-blue-500" />
-                                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">Right Hemisphere</h4>
+                                        <h4 className="font-semibold text-gray-900 dark:text-slate-100">Right Hemisphere</h4>
                                     </div>
                                     {brainWaveData.right.map((wave, index) => (
                                         <motion.div
@@ -469,14 +468,14 @@ export default function BrainSignalVisualizer() {
                                         >
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <span className="font-medium text-slate-900 dark:text-slate-100">{wave.label}</span>
-                                                    <span className="text-xs text-slate-500 ml-2">{wave.frequency}</span>
+                                                    <span className="font-medium text-gray-900 dark:text-slate-100">{wave.label}</span>
+                                                    <span className="text-xs text-gray-500 ml-2">{wave.frequency}</span>
                                                 </div>
-                                                <span className="font-bold text-slate-900 dark:text-slate-100">
+                                                <span className="font-bold text-gray-900 dark:text-slate-100">
                                                     {isDeviceConnected ? wave.value.toFixed(1) : "--"}%
                                                 </span>
                                             </div>
-                                            <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                                            <div className="h-2 bg-gray-200 dark:bg-slate-700 rounded overflow-hidden">
                                                 <motion.div
                                                     className="h-full bg-gradient-to-r from-blue-500 to-blue-600"
                                                     initial={{ width: 0 }}
@@ -492,21 +491,21 @@ export default function BrainSignalVisualizer() {
                     </div>
 
                     {/* Right Column - Metrics & Info */}
-                    <div className="col-span-3 space-y-6">
+                    <div className="col-span-3 space-y-4">
                         {/* Session Statistics */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
                         >
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                                <div className="p-2 rounded bg-emerald-100 dark:bg-emerald-900/30">
                                     <TrendingUp className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                                 </div>
-                                <h3 className="font-semibold text-slate-900 dark:text-slate-100">Session Statistics</h3>
+                                <h3 className="font-semibold text-gray-900 dark:text-slate-100">Session Statistics</h3>
                             </div>
-                            <div className="space-y-4">
+                            <div className="space-y-3">
                                 {[
                                     { label: "Duration", value: isDeviceConnected ? "12:45" : "--:--" },
                                     { label: "Average Alpha", value: isDeviceConnected ? "33.5%" : "--%%" },
@@ -515,13 +514,13 @@ export default function BrainSignalVisualizer() {
                                 ].map((stat, index) => (
                                     <motion.div
                                         key={stat.label}
-                                        className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50"
+                                        className="flex items-center justify-between p-3 rounded bg-gray-50 dark:bg-slate-800/50"
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
                                     >
-                                        <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{stat.label}</span>
-                                        <span className="font-bold text-slate-900 dark:text-slate-100">{stat.value}</span>
+                                        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{stat.label}</span>
+                                        <span className="font-bold text-gray-900 dark:text-slate-100">{stat.value}</span>
                                     </motion.div>
                                 ))}
                             </div>
@@ -529,42 +528,42 @@ export default function BrainSignalVisualizer() {
 
                         {/* System Information */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800">
-                                    <Monitor className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                                <div className="p-2 rounded bg-gray-100 dark:bg-slate-800">
+                                    <Monitor className="h-5 w-5 text-gray-600 dark:text-slate-400" />
                                 </div>
-                                <h3 className="font-semibold text-slate-900 dark:text-slate-100">System Information</h3>
+                                <h3 className="font-semibold text-gray-900 dark:text-slate-100">System Information</h3>
                             </div>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between text-sm">
-                                    <span className="text-slate-600 dark:text-slate-400">Signal Quality</span>
+                                    <span className="text-gray-600 dark:text-slate-400">Signal Quality</span>
                                     <span className={cn(
                                         "font-medium",
-                                        isDeviceConnected ? "text-emerald-600" : "text-slate-500"
+                                        isDeviceConnected ? "text-emerald-600" : "text-gray-500"
                                     )}>
                                         {isDeviceConnected ? "Excellent" : "No Signal"}
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between text-sm">
-                                    <span className="text-slate-600 dark:text-slate-400">Noise Level</span>
-                                    <span className="font-medium text-slate-700 dark:text-slate-300">
+                                    <span className="text-gray-600 dark:text-slate-400">Noise Level</span>
+                                    <span className="font-medium text-gray-700 dark:text-slate-300">
                                         {isDeviceConnected ? "Minimal" : "N/A"}
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between text-sm">
-                                    <span className="text-slate-600 dark:text-slate-400">Sample Rate</span>
-                                    <span className="font-medium text-slate-700 dark:text-slate-300">
+                                    <span className="text-gray-600 dark:text-slate-400">Sample Rate</span>
+                                    <span className="font-medium text-gray-700 dark:text-slate-300">
                                         {isDeviceConnected ? "500 Hz" : "0 Hz"}
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between text-sm">
-                                    <span className="text-slate-600 dark:text-slate-400">Channels Active</span>
-                                    <span className="font-medium text-slate-700 dark:text-slate-300">
+                                    <span className="text-gray-600 dark:text-slate-400">Channels Active</span>
+                                    <span className="font-medium text-gray-700 dark:text-slate-300">
                                         {isDeviceConnected ? "3/3" : "0/3"}
                                     </span>
                                 </div>
@@ -573,36 +572,36 @@ export default function BrainSignalVisualizer() {
 
                         {/* Recent Activity */}
                         <motion.div 
-                            className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 dark:border-slate-800/60"
+                            className="bg-white dark:bg-slate-900 rounded border border-gray-200 dark:border-slate-800 p-4"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                                <div className="p-2 rounded bg-emerald-100 dark:bg-emerald-900/30">
                                     <Activity className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                                 </div>
-                                <h3 className="font-semibold text-slate-900 dark:text-slate-100">Recent Activity</h3>
+                                <h3 className="font-semibold text-gray-900 dark:text-slate-100">Recent Activity</h3>
                             </div>
                             <div className="space-y-3">
                                 {isDeviceConnected ? (
                                     <>
-                                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
                                             <div className="w-2 h-2 rounded-full bg-emerald-500" />
                                             <span>Device connected successfully</span>
                                         </div>
-                                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
                                             <div className="w-2 h-2 rounded-full bg-blue-500" />
                                             <span>Data stream initiated</span>
                                         </div>
-                                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
                                             <div className="w-2 h-2 rounded-full bg-emerald-500" />
                                             <span>Signal quality: Excellent</span>
                                         </div>
                                     </>
                                 ) : (
                                     <div className="text-center py-4">
-                                        <div className="text-slate-400 dark:text-slate-500 text-sm">
+                                        <div className="text-gray-400 dark:text-slate-500 text-sm">
                                             No recent activity
                                         </div>
                                     </div>
